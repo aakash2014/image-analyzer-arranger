@@ -34,7 +34,7 @@ def process_image(asset_id: int, file_path: str, width: int | None, height: int 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             asset_id,
-            face["embedding"].tobytes(),
+            face["embedding"].tobytes() if face["embedding"] is not None else None,
             match.get("identity"),
             match.get("priority", 1),
             match.get("confidence", 0.0),
