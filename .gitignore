@@ -1,1 +1,7 @@
 .git-creds
+test_data/
+photocurator.db
+__pycache__/
+*.pyc
+models/
+
