@@ -58,14 +58,14 @@ def cluster_bursts():
         if len(phash_valid) < 2:
             continue
 
-        max_dist = 0
-        for i in range(len(phash_valid)):
-            for j in range(i + 1, len(phash_valid)):
-                d = _phash_distance(phash_valid[i][1], phash_valid[j][1])
-                if d > max_dist:
-                    max_dist = d
+        valid = True
+        for i in range(len(phash_valid) - 1):
+            d = _phash_distance(phash_valid[i][1], phash_valid[i + 1][1])
+            if d > BURST_PHASH_DISTANCE:
+                valid = False
+                break
 
-        if max_dist > BURST_PHASH_DISTANCE:
+        if not valid:
             continue
 
         phash_valid.sort(key=lambda x: x[2], reverse=True)

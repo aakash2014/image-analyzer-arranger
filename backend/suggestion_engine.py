@@ -49,7 +49,7 @@ def generate_suggestions():
                 "reason": "Near-duplicate in burst sequence",
             })
 
-        if junk_prob > JUNK_PROBABILITY_THRESHOLD:
+        if junk_prob >= JUNK_PROBABILITY_THRESHOLD:
             suggestions.append({
                 "category": "junk",
                 "suggested_action": "DELETE_CANDIDATE",
