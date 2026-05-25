@@ -1,9 +1,14 @@
+import os
 import sqlite3
 import threading
 from datetime import datetime
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent.parent / "photocurator.db"
+_DB_PATH_OVERRIDE = os.environ.get("PHOTOCURATOR_DB")
+if _DB_PATH_OVERRIDE:
+    DB_PATH = Path(_DB_PATH_OVERRIDE)
+else:
+    DB_PATH = Path(__file__).resolve().parent.parent / "photocurator.db"
 
 _local = threading.local()
 

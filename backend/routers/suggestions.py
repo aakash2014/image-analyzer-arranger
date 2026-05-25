@@ -15,7 +15,7 @@ def get_suggestions(category: Optional[str] = Query(None)):
             SELECT s.id, s.asset_id, s.category, s.suggested_action,
                    s.confidence, s.reason, a.file_path, a.file_name,
                    a.memory_score, a.face_count, a.scene_category,
-                   a.aesthetic_score, a.junk_probability
+                   a.aesthetic_score, a.junk_probability, a.blur_score
             FROM suggestions s
             JOIN assets a ON s.asset_id = a.id
             WHERE s.category = ?
@@ -26,7 +26,7 @@ def get_suggestions(category: Optional[str] = Query(None)):
             SELECT s.id, s.asset_id, s.category, s.suggested_action,
                    s.confidence, s.reason, a.file_path, a.file_name,
                    a.memory_score, a.face_count, a.scene_category,
-                   a.aesthetic_score, a.junk_probability
+                   a.aesthetic_score, a.junk_probability, a.blur_score
             FROM suggestions s
             JOIN assets a ON s.asset_id = a.id
             ORDER BY s.category, s.confidence DESC
@@ -50,6 +50,7 @@ def get_suggestions(category: Optional[str] = Query(None)):
             "scene_category": row["scene_category"],
             "aesthetic_score": row["aesthetic_score"],
             "junk_probability": row["junk_probability"],
+            "blur_score": row["blur_score"],
         })
 
     return grouped
